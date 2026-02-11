@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="Controllers.dashboard_adminController"
+            styleClass="dash-root">
+
+    <!-- LEFT SIDEBAR -->
+    <left>
+        <VBox fx:id="sidebar" styleClass="tplSidebar" spacing="10">
+
+            <!-- Brand (logo + text) -->
+            <HBox spacing="10" alignment="CENTER_LEFT" styleClass="tplBrand">
+                <ImageView fitHeight="50" fitWidth="50" preserveRatio="true">
+                    <image>
+                        <Image url="@img/logo.png"/>
+                    </image>
+                </ImageView>
+                <VBox spacing="2">
+                    <Label text="INVESTIA" styleClass="tplBrandTitle"/>
+                </VBox>
+            </HBox>
+
+            <Separator styleClass="tplSep"/>
+
+            <!-- MENU -->
+            <Label text="Gestion" styleClass="tplSideTitle"/>
+
+            <Button fx:id="btnUsers" onAction="#openUsers" styleClass="tplSideBtn">
+                <graphic>
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <SVGPath styleClass="sideIcon"
+                                 content="M16 14c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-8 0c2.21 0 4-1.79 4-4S10.21 6 8 6s-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h10v-2c0-1.54.58-2.84 1.55-3.86C10.27 16.46 9.1 16 8 16zm8 0c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        <Label text="Comptes" styleClass="tplSideText"/>
+                    </HBox>
+                </graphic>
+            </Button>
+
+            <Button fx:id="btnProjects" onAction="#openProjects" styleClass="tplSideBtn">
+                <graphic>
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <SVGPath styleClass="sideIcon"
+                                 content="M10 4H2c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h20c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2H12l-2-2z"/>
+                        <Label text="Projets" styleClass="tplSideText"/>
+                    </HBox>
+                </graphic>
+            </Button>
+
+            <Button fx:id="btnEvents" onAction="#openEvents" styleClass="tplSideBtn">
+                <graphic>
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <SVGPath styleClass="sideIcon"
+                                 content="M7 10h5v5H7v-5zm10-8h-1V0h-2v2H10V0H8v2H7c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 18H7V7h12v13z"/>
+                        <Label text="Événements" styleClass="tplSideText"/>
+                    </HBox>
+                </graphic>
+            </Button>
+
+            <Button fx:id="btnHistory" onAction="#openHistory" styleClass="tplSideBtn">
+                <graphic>
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <SVGPath styleClass="sideIcon"
+                                 content="M13 3a9 9 0 1 0 9 9h-2a7 7 0 1 1-7-7V3l4 4-4 4V8a5 5 0 1 0 5 5h2a7 7 0 0 1-7 7A7 7 0 1 1 13 6v3l-4-4 4-4v2z"/>
+                        <Label text="Historique" styleClass="tplSideText"/>
+                    </HBox>
+                </graphic>
+            </Button>
+
+
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <Button text="Logout" onAction="#logout" styleClass="tplLogoutBtn"/>
+        </VBox>
+    </left>
+
+    <!-- CENTER (WELCOME MESSAGE) -->
+    <center>
+        <StackPane fx:id="contentPane" styleClass="admin-content">
+            <VBox spacing="10" alignment="CENTER" styleClass="welcomeCard">
+                <Label text="Bienvenue à Investia  👋" styleClass="welcomeTitle"/>
+                <Label text="Sélectionnez une section dans la sidebar pour commencer."
+                       styleClass="welcomeSub"/>
+            </VBox>
+        </StackPane>
+    </center>
+
+</BorderPane>

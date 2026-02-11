@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      spacing="16" styleClass="admin-page">
+
+    <VBox styleClass="whiteCard" spacing="10">
+        <Label text="Bienvenue dans INVESTIA 👋" styleClass="pageTitle"/>
+        <Label text="Utilisez le menu à gauche pour gérer les Comptes, Projets, Événements et l’Historique."
+               styleClass="helloSub"/>
+    </VBox>
+
+    <HBox spacing="14">
+        <VBox styleClass="statCard" spacing="6" prefWidth="240">
+            <Label text="Astuce" styleClass="statLabel"/>
+            <Label text="Clique sur “Comptes” pour voir la table + badges." styleClass="statValue"/>
+        </VBox>
+
+        <VBox styleClass="statCard" spacing="6" prefWidth="240">
+            <Label text="Sécurité" styleClass="statLabel"/>
+            <Label text="Accès réservé Admin uniquement." styleClass="statValue"/>
+        </VBox>
+    </HBox>
+
+</VBox>

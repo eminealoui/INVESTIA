@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="Controllers.EventsController"
+      spacing="18" styleClass="admin-page">
+
+    <Label text="Gestion des Événements" styleClass="pageTitle"/>
+
+    <HBox spacing="14">
+        <VBox styleClass="statCard" spacing="6" prefWidth="220">
+            <Label text="Total événements" styleClass="statLabel"/>
+            <Label fx:id="totalLabel" text="0" styleClass="statValue"/>
+        </VBox>
+
+        <VBox styleClass="statCard" spacing="6" prefWidth="220">
+            <Label text="Validés" styleClass="statLabel"/>
+            <Label fx:id="validLabel" text="0" styleClass="statValue"/>
+        </VBox>
+
+        <VBox styleClass="statCard" spacing="6" prefWidth="220">
+            <Label text="Refusés" styleClass="statLabel"/>
+            <Label fx:id="refusedLabel" text="0" styleClass="statValue"/>
+        </VBox>
+
+        <VBox styleClass="statCard" spacing="6" prefWidth="220">
+            <Label text="En attente" styleClass="statLabel"/>
+            <Label fx:id="pendingLabel" text="0" styleClass="statValue"/>
+        </VBox>
+    </HBox>
+
+    <VBox styleClass="tableCard" spacing="12">
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <Label text="All Events" styleClass="tableTitle"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <HBox styleClass="miniSearch" spacing="8" alignment="CENTER_LEFT">
+                <Label text="🔎" styleClass="miniSearchIcon"/>
+                <TextField fx:id="searchField" promptText="Search event..." styleClass="miniSearchField"/>
+            </HBox>
+        </HBox>
+
+        <TableView fx:id="tableEvents" styleClass="proTable" prefHeight="520">
+            <columns>
+                <TableColumn fx:id="colId" text="ID" prefWidth="70"/>
+                <TableColumn fx:id="colTitle" text="Titre" prefWidth="240"/>
+                <TableColumn fx:id="colDesc" text="Description" prefWidth="320"/>
+                <TableColumn fx:id="colDate" text="Date" prefWidth="140"/>
+                <TableColumn fx:id="colEntrepreneur" text="Entrepreneur ID" prefWidth="160"/>
+                <TableColumn fx:id="colStatus" text="Statut" prefWidth="140"/>
+                <TableColumn fx:id="colActions" text="Actions" prefWidth="150"/>
+            </columns>
+        </TableView>
+    </VBox>
+</VBox>

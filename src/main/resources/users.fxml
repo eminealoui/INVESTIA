@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="Controllers.UsersController"
+      spacing="18" styleClass="admin-page">
+
+    <!-- Title -->
+    <Label text="Gestion des Comptes" styleClass="pageTitle"/>
+
+    <!-- Stats cards -->
+    <HBox spacing="14">
+        <VBox styleClass="statCard" spacing="6" prefWidth="220">
+            <Label text="Total utilisateurs" styleClass="statLabel"/>
+            <Label fx:id="totalLabel" text="0" styleClass="statValue"/>
+        </VBox>
+
+        <VBox styleClass="statCard" spacing="6" prefWidth="220">
+            <Label text="Admins" styleClass="statLabel"/>
+            <Label fx:id="adminsLabel" text="0" styleClass="statValue"/>
+        </VBox>
+
+        <VBox styleClass="statCard" spacing="6" prefWidth="220">
+            <Label text="Entrepreneurs" styleClass="statLabel"/>
+            <Label fx:id="entreLabel" text="0" styleClass="statValue"/>
+        </VBox>
+
+        <VBox styleClass="statCard" spacing="6" prefWidth="220">
+            <Label text="Investisseurs" styleClass="statLabel"/>
+            <Label fx:id="invLabel" text="0" styleClass="statValue"/>
+        </VBox>
+    </HBox>
+
+
+    <!-- Table card -->
+    <VBox styleClass="tableCard" spacing="12">
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <Label text="All Users" styleClass="tableTitle"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <HBox styleClass="miniSearch" spacing="8" alignment="CENTER_LEFT">
+                <Label text="🔎" styleClass="miniSearchIcon"/>
+                <TextField  fx:id="searchField" promptText="Search user..." styleClass="miniSearchField"/>
+            </HBox>
+        </HBox>
+
+        <TableView fx:id="tableUsers" styleClass="proTable" prefHeight="520">
+            <columns>
+                <TableColumn fx:id="colId" text="ID" prefWidth="70"/>
+                <TableColumn fx:id="colName" text="Nom" prefWidth="240"/>
+                <TableColumn fx:id="colEmail" text="Email" prefWidth="280"/>
+                <TableColumn fx:id="colRole" text="Rôle" prefWidth="180"/>
+                <TableColumn fx:id="colStatus" text="Status" prefWidth="140"/>
+                <TableColumn fx:id="colActions" text="Actions" prefWidth="140"/>
+            </columns>
+        </TableView>
+    </VBox>
+    <!-- Toast container (bottom-right) -->
+    <VBox fx:id="toastContainer"
+          pickOnBounds="false"
+          alignment="BOTTOM_RIGHT"
+          spacing="8"
+          StackPane.alignment="BOTTOM_RIGHT"
+          style="-fx-padding: 0 18 18 0;" />
+</VBox>
