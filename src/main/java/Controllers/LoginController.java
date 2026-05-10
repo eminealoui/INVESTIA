@@ -3,6 +3,7 @@ package Controllers;
 import Entities.Role;
 import Entities.User;
 import Services.UserCRUD;
+import Utils.PasswordUtils;
 import Utils.sceneManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -35,7 +36,7 @@ public class LoginController {
                 msgLabel.setText("Email introuvable");
                 return;
             }
-            if (!u.getPassword().equals(pass)) {
+            if (!PasswordUtils.matches(pass, u.getPassword())) {
                 msgLabel.setText("Mot de passe incorrect");
                 return;
             }

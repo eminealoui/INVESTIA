@@ -7,7 +7,7 @@ public class MyBD {
     private static MyBD instance;
     private Connection conn;
 
-    private final String URL = "jdbc:mysql://localhost:3307/investdb?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
+    private final String URL = "jdbc:mysql://localhost:3306/investia_symfony?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
     private final String USER = "root";
     private final String PASS = "";
 

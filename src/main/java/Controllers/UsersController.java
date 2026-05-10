@@ -1,5 +1,6 @@
 package Controllers;
 
+import Entities.Role;
 import Entities.User;
 import Services.UserCRUD;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -12,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.SVGPath;
@@ -182,16 +184,13 @@ public class UsersController {
 
                 btnAdd.setOnAction(e -> {
                     User u = getRowUser();
-                    if (u == null) return;
-                    System.out.println("ADD clicked user id=" + u.getId());
-                    // TODO: open add (dialog) - si tu veux je te le fais
+                    openUserDialog(null);
                 });
 
                 btnEdit.setOnAction(e -> {
                     User u = getRowUser();
                     if (u == null) return;
-                    System.out.println("EDIT clicked user id=" + u.getId());
-                    // TODO: open edit (dialog)
+                    openUserDialog(u);
                 });
 
                 btnDelete.setOnAction(e -> {
@@ -283,6 +282,80 @@ public class UsersController {
         a.setHeaderText(null);
         a.setContentText(msg);
         a.showAndWait();
+    }
+
+    private void openUserDialog(User existingUser) {
+        boolean isEdit = existingUser != null;
+        Dialog<User> dialog = new Dialog<>();
+        dialog.setTitle(isEdit ? "Modifier utilisateur" : "Ajouter utilisateur");
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+        TextField nomField = new TextField(isEdit ? safeValue(existingUser.getNom()) : "");
+        TextField prenomField = new TextField(isEdit ? safeValue(existingUser.getPrenom()) : "");
+        TextField emailField = new TextField(isEdit ? safeValue(existingUser.getEmail()) : "");
+        PasswordField passwordField = new PasswordField();
+        passwordField.setText(isEdit ? safeValue(existingUser.getPassword()) : "");
+        ChoiceBox<String> roleBox = new ChoiceBox<>(FXCollections.observableArrayList("ADMIN", "ENTREPRENEUR", "INVESTISSEUR"));
+        roleBox.setValue(isEdit && existingUser.getRole() != null ? existingUser.getRole().name() : "INVESTISSEUR");
+        TextField telephoneField = new TextField(isEdit ? safeValue(existingUser.getTelephone()) : "");
+        TextField cinField = new TextField(isEdit ? safeValue(existingUser.getCin()) : "");
+        CheckBox activeBox = new CheckBox("Actif");
+        activeBox.setSelected(!isEdit || existingUser.isActive());
+
+        GridPane form = new GridPane();
+        form.setHgap(10);
+        form.setVgap(10);
+        form.addRow(0, new Label("Nom"), nomField);
+        form.addRow(1, new Label("Prenom"), prenomField);
+        form.addRow(2, new Label("Email"), emailField);
+        form.addRow(3, new Label("Mot de passe"), passwordField);
+        form.addRow(4, new Label("Role"), roleBox);
+        form.addRow(5, new Label("Telephone"), telephoneField);
+        form.addRow(6, new Label("CIN"), cinField);
+        form.addRow(7, new Label("Statut"), activeBox);
+        dialog.getDialogPane().setContent(form);
+
+        dialog.setResultConverter(buttonType -> {
+            if (buttonType != ButtonType.OK) {
+                return null;
+            }
+            User user = isEdit ? existingUser : new User();
+            user.setNom(nomField.getText());
+            user.setPrenom(prenomField.getText());
+            user.setEmail(emailField.getText());
+            user.setPassword(passwordField.getText());
+            user.setRole(Role.valueOf(roleBox.getValue()));
+            user.setTelephone(telephoneField.getText());
+            user.setCin(cinField.getText());
+            user.setActive(activeBox.isSelected());
+            if (user.getStatutVerification() == null) {
+                user.setStatutVerification("VERIFIE");
+            }
+            return user;
+        });
+
+        Optional<User> result = dialog.showAndWait();
+        if (result.isEmpty()) {
+            return;
+        }
+
+        try {
+            if (isEdit) {
+                userCRUD.modifier(result.get());
+                showToast("Utilisateur modifie", ToastType.SUCCESS);
+            } else {
+                userCRUD.ajouter(result.get());
+                showToast("Utilisateur ajoute", ToastType.SUCCESS);
+            }
+            refresh();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            showError("Erreur", ex.getMessage());
+        }
+    }
+
+    private String safeValue(String value) {
+        return value == null ? "" : value;
     }
 
     // --- SVG paths (clean icons) ---

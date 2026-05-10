@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 
 <VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="Controllers.ProjectsController"
+      fx:controller="Controllers.projectsController"
       spacing="18" styleClass="admin-page">
 
     <Label text="Gestion des Projets" styleClass="pageTitle"/>
@@ -46,7 +46,7 @@
                 <TableColumn fx:id="colId" text="ID" prefWidth="70"/>
                 <TableColumn fx:id="colTitle" text="Titre" prefWidth="240"/>
                 <TableColumn fx:id="colDesc" text="Description" prefWidth="340"/>
-                <TableColumn fx:id="colEntrepreneur" text="Entrepreneur ID" prefWidth="160"/>
+                <TableColumn fx:id="colEntrepreneur" text="Profil entrepreneur ID" prefWidth="160"/>
                 <TableColumn fx:id="colStatus" text="Statut" prefWidth="140"/>
                 <TableColumn fx:id="colActions" text="Actions" prefWidth="150"/>
             </columns>
